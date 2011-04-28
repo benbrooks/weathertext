@@ -9,9 +9,9 @@
 # The radar image can be found at http://weather.com by searching
 # on your location and then following the "Classic Map" link. Use
 # the URL of that image here.
-zipcode = '60502'
-station = 'KARR'
-radar   = 'http://i.imwx.com/web/radar/us_ord_ultraradar_plus_usen.jpg'
+zipcode = '98126'
+station = 'KBFI'
+radar   = 'http://i.imwx.com//web/radar/us_sea_ultraradar_plus_usen.jpg'
 
 
 # The code below shouldn't be modified unless you want to change the layout
@@ -26,7 +26,7 @@ import re
 
 # The date and time as a string. Note: My host's server is on Eastern Time
 # and I'm on Central Time, so I subtract an hour.
-now = datetime.datetime.now() - datetime.timedelta(hours=1)
+now = datetime.datetime.now()
 now = now.strftime("%a, %b %d %I:%M %p")
 # Delete leading zeros for day and hour.
 now = re.sub(r' 0(\d )', r' \1', now)   # day has a space before and after
@@ -58,14 +58,21 @@ content = '''Content-type: text/html
 <meta name="viewport" content = "width = device-width" />
 <title>Weather - %s</title>
 <style type="text/css">
-  body { font-family: Helvetica;}
-  h1 { font-size: 125%%;}
+  body { font-family: 'Thonburi';background-color:#002b36;color:#839496;}
+  h1 { font-size: 4.5em;text-align:center;line-height:0.2em;color:#eee8d5;text-shadow:0px 2px 3px #586e75;font-family:Futura-Medium;padding-left:40px;}
+  h2 {font-size: 1.1em;font-weight:400;margin-bottom:-10px;text-transform:uppercase;}
+  .condition {font-size: 2em; text-align:center;line-height:0.2em;padding-top:0px;font-weight:400;}
+  .small {font-size:1em;color:#657b83;}
+  .forecast {}
+  .forecastr {float:right;margin-top:-120px;margin-right:10px;}
+  .temps{padding-left:10px;}
 </style>
+<link rel="apple-touch-icon-precomposed" href="http://www.b3nbrooks.com/apple-touch-icon.png" />
 </head>
 <body>
-<h1>Temperature: %.0f&deg;</h1>
-<p>%s<br />
-Wind: %s at %s mph%s<br />''' % (now, float(noaa['temp_f']), yahoo['condition']['text'], noaa['wind_dir'], noaa['wind_mph'], gust )
+<h1>%.0f&deg;</h1>
+<h4 class="condition">%s</h4>
+<p class="small">Wind: %s at %s mph%s<br />''' % (now, float(noaa['temp_f']), yahoo['condition']['text'], noaa['wind_dir'], noaa['wind_mph'], gust )
 
 try:
   content += 'Wind Chill: %s&deg;<br />\n' % noaa['windchill_f']
@@ -83,19 +90,21 @@ content += 'Pressure: %s and %s<br />\n' % (float(yahoo['atmosphere']['pressure'
 
 content += 'Sunlight: %s to %s</p>\n' % (yahoo['astronomy']['sunrise'], yahoo['astronomy']['sunset'])
 
-content += '<p><img width="100%%" src="%s" /></p>\n' % radar
 
-content += '''<h1>Today</h1>
-<p>High: %s&deg;<br />
-Low: %s&deg;<br />
-%s</p>
+
+content += '''<div class="forecast"><h2>Today</h2>
+<p class="temps">High: <span style="color:#cb4b16;"> %s&deg; </span><br />
+Low: <span style="color:#2aa198;"> %s&deg; </span><br />
+<span style="color:#268bd2;"> %s </span></p></div>
 ''' % (int(today['high']), int(today['low']), today['text'])
 
-content += '''<h1>Tomorrow</h1>
-<p>High: %s&deg;<br />
-Low: %s&deg;<br />
-%s</p>
+content += '''<div class="forecastr"><h2>Tomorrow</h2>
+<p class="temps">High: <span style="color:#cb4b16;"> %s&deg; </span><br />
+Low: <span style="color:#2aa198;"> %s&deg; </span><br />
+<span style="color:#268bd2;"> %s </span></p></div>
 ''' % (int(tomorrow['high']), int(tomorrow['low']), tomorrow['text'])
+
+content += '<p><img width="100%%" src="%s" /></p>\n' % radar
 
 content += '''</body>
 </html>'''
