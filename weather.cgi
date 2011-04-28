@@ -59,12 +59,12 @@ content = '''Content-type: text/html
 <title>Weather - %s</title>
 <style type="text/css">
   body { font-family: 'Thonburi';background-color:#002b36;color:#839496;}
-  h1 { font-size: 4.5em;text-align:center;line-height:0.2em;color:#eee8d5;text-shadow:0px 2px 3px #586e75;font-family:Futura-Medium;padding-left:40px;}
+  h1 { font-size: 5.5em;text-align:center;line-height:0.2em;color:#eee8d5;text-shadow:0px 2px 3px #586e75;font-family:Futura-CondensedExtraBold;padding-left:40px;}
   h2 {font-size: 1.1em;font-weight:400;margin-bottom:-10px;text-transform:uppercase;}
   .condition {font-size: 2em; text-align:center;line-height:0.2em;padding-top:0px;font-weight:400;}
   .small {font-size:1em;color:#657b83;}
-  .forecast {}
-  .forecastr {float:right;margin-top:-120px;margin-right:10px;}
+  .forecast {clear:both;float:left;}
+  .forecastr {float:right;margin-right:10px;}
   .temps{padding-left:10px;}
 </style>
 <link rel="apple-touch-icon-precomposed" href="http://www.b3nbrooks.com/apple-touch-icon.png" />
