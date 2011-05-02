@@ -59,16 +59,23 @@ content = '''Content-type: text/html
 <title>Weather - %s</title>
 <style type="text/css">
   body { font-family: 'Thonburi';background-color:#002b36;color:#839496;}
-  h1 { font-size: 5.5em;text-align:center;line-height:0.2em;color:#eee8d5;text-shadow:0px 2px 3px #586e75;font-family:Futura-CondensedExtraBold;padding-left:40px;}
-  h2 {font-size: 1.1em;font-weight:400;margin-bottom:-10px;text-transform:uppercase;}
-  .condition {font-size: 2em; text-align:center;line-height:0.2em;padding-top:0px;font-weight:400;}
-  .small {font-size:1em;color:#657b83;}
-  .forecast {clear:both;float:left;}
-  .forecastr {float:right;margin-right:10px;}
-  .temps{padding-left:10px;}
+  h1 { font-size: 5.5em;text-align:center;line-height:0.2em;color:#eee8d5;text-shadow:0px 2px 3px #586e75;font-family:Futura-CondensedExtraBold;padding-left:40px;margin-top:50px;margin-bottom:30px;}
+  h2 {font-family: 'Thonburi';font-size: 1.1em;font-weight:400;text-transform:uppercase;padding-bottom:10px;margin:0px;clear:left;}
+  h4 {font-family: 'Thonburi';line-height:0px;margin:0px;padding:0px;}
+  .condition {font-size: 2em; text-align:center;line-height:0.2em;padding-top:0px;font-weight:400;margin-bottom:20px;}
+  .small {font-size:0.95em;color:#657b83;border-top: 1px solid #586e75;border-bottom: 1px solid #586e75;margin-bottom:30px;}
+  .forecast {clear:left;line-height:0px;padding:0px;margin:0px;}
+  .forecastr {margin-right:10px;clear:left;line-height:0px;padding-bottom:0px;}
+  .temps{padding-left:110px;float:left;clear:both;margin-top:-10px;}
+  .temph{padding-left:110px;float:left;clear:both;margin-top:-25px;}
+  .templ{padding-left:210px;float:left;clear:both;margin-top:-25px;}
+  .blurb {float:left;clear:both;padding-top:0px;font-size:0.9em;margin-top:2px;line-height:0px;padding-bottom:10px;margin-bottom:10px;margin-left:5px;}
+  .radar{margin-top:90px;}
+  p{font-family: 'Thonburi';line-height:1.2em;padding-top:3px;padding-bottom:3px;}
 </style>
 <link rel="apple-touch-icon-precomposed" href="http://www.b3nbrooks.com/apple-touch-icon.png" />
 </head>
+<body onload="setTimeout(function() { window.top.scrollTo(0, 1) }, 100);">
 <body>
 <h1>%.0f&deg;</h1>
 <h4 class="condition">%s</h4>
@@ -92,19 +99,19 @@ content += 'Sunlight: %s to %s</p>\n' % (yahoo['astronomy']['sunrise'], yahoo['a
 
 
 
-content += '''<div class="forecast"><h2>Today</h2>
-<p class="temps">High: <span style="color:#cb4b16;"> %s&deg; </span><br />
-Low: <span style="color:#2aa198;"> %s&deg; </span><br />
-<span style="color:#268bd2;"> %s </span></p></div>
+content += '''<div class="forecast"><h2>Today</h2></div>
+<div class="temph">High: <span style="color:#cb4b16;"> %s&deg; </span></div>
+<div class="templ">Low: <span style="color:#2aa198;"> %s&deg; </span></div>
+<div class="blurb"><span style="color:#268bd2;"> %s </span></div>
 ''' % (int(today['high']), int(today['low']), today['text'])
 
-content += '''<div class="forecastr"><h2>Tomorrow</h2>
-<p class="temps">High: <span style="color:#cb4b16;"> %s&deg; </span><br />
-Low: <span style="color:#2aa198;"> %s&deg; </span><br />
-<span style="color:#268bd2;"> %s </span></p></div>
+content += '''<div class="forecast"><h2>Tomorrow</h2></div>
+<div class="temph">High: <span style="color:#cb4b16;"> %s&deg; </span></div>
+<div class="templ">Low: <span style="color:#2aa198;"> %s&deg; </span></div>
+<div class="blurb"><span style="color:#268bd2;"> %s </span></div>
 ''' % (int(tomorrow['high']), int(tomorrow['low']), tomorrow['text'])
 
-content += '<p><img width="100%%" src="%s" /></p>\n' % radar
+content += '<div class="radar"><img width="100%%" src="%s" /></div>\n' % radar
 
 content += '''</body>
 </html>'''
